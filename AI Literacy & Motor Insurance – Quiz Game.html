@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)file:///Users/aleiava/Downloads/AI_Literacy_Insurance_Quiz.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Literacy &amp; Motor Insurance – Quiz Game</title>
+  <style>
+    :root{
+      --bg:#0f172a;
+      --card:#111827;
+      --accent:#60a5fa;
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --good:#22c55e;
+      --bad:#ef4444;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial;
+      background:linear-gradient(180deg,#0b1223 0%, #0f172a 60%, #0b1223 100%);
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+    .app{
+      width:100%;
+      max-width:900px;
+    }
+    .card{
+      background:rgba(17,24,39,.75);
+      backdrop-filter: blur(6px);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      overflow:hidden;
+    }
+    header{
+      padding:20px 24px;
+      display:flex;
+      align-items:center;
+      gap:16px;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    header h1{
+      font-size:20px;margin:0;font-weight:700;letter-spacing:.3px
+    }
+    header .meta{
+      margin-left:auto;display:flex;gap:14px;font-size:14px;color:var(--muted)
+    }
+    .pill{border:1px solid rgba(255,255,255,.12); padding:6px 10px; border-radius:999px}
+    main{padding:24px}
+    .question{
+      font-size:20px;line-height:1.35;margin:6px 0 18px
+    }
+    .answers{display:grid;grid-template-columns:1fr 1fr; gap:12px}
+    .btn{
+      background:#0b1223;
+      border:1px solid rgba(255,255,255,.12);
+      color:var(--text);
+      border-radius:12px;
+      padding:14px 16px;
+      text-align:left;
+      cursor:pointer;
+      transition:.15s ease-in-out;
+      position:relative;
+      min-height:56px;
+    }
+    .btn:hover{border-color:var(--accent); transform:translateY(-1px)}
+    .btn.correct{border-color:var(--good); box-shadow:0 0 0 2px rgba(34,197,94,.15) inset}
+    .btn.wrong{border-color:var(--bad); box-shadow:0 0 0 2px rgba(239,68,68,.15) inset}
+    .controls{display:flex; justify-content:space-between; align-items:center; margin-top:18px}
+    .primary{
+      background:var(--accent); color:#0b1223; border:none; padding:12px 16px; border-radius:12px;
+      font-weight:700; cursor:pointer; box-shadow:0 10px 20px rgba(96,165,250,.25);
+    }
+    .primary:disabled{opacity:.5; cursor:not-allowed}
+    .ghost{background:transparent; border:1px solid rgba(255,255,255,.12); color:var(--text); padding:10px 14px; border-radius:12px; cursor:pointer}
+    .progress{
+      height:8px; background:rgba(255,255,255,.08); border-radius:999px; overflow:hidden; margin-top:10px
+    }
+    .bar{height:100%; width:0; background:linear-gradient(90deg,#60a5fa,#a78bfa); transition: width .3s ease}
+    .status{color:var(--muted); font-size:14px; margin-top:6px}
+    .result{
+      text-align:center; padding:40px 24px 28px
+    }
+    .result h2{margin:0 0 10px}
+    .grid-two{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:16px auto; max-width:520px}
+    .stat{background:#0b1223; border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:14px}
+    code{background:#0b1223; padding:2px 6px; border-radius:6px; border:1px solid rgba(255,255,255,.12)}
+    @media (max-width:720px){ .answers{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="card">
+      <header>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2l7 4v6c0 5-3 9-7 10C8 21 5 17 5 12V6l7-4Z" stroke="white" opacity=".7" stroke-width="1.2"></path>
+          <circle cx="12" cy="10" r="3.2" stroke="white" opacity=".6" stroke-width="1.2"></circle>
+        </svg>
+        <h1>AI Literacy &amp; Motor Insurance – Quiz</h1>
+        <div class="meta">
+          <div class="pill">Score: <span id="score">0</span></div>
+          <div class="pill">Q <span id="qnum">1</span>/<span id="qtotal">10</span></div>
+          <div class="pill">Time: <span id="timer">01:26</span></div>
+        </div>
+      </header>
+      <main>
+        <div id="qa">
+          <div class="question" id="question">A safe way to cite document evidence in your report is to…</div>
+          <div class="answers" id="answers"><button class="btn">Reference the specific DIP and section/heading used</button><button class="btn">Copy entire contracts verbatim</button><button class="btn">Use unrelated websites</button><button class="btn">Skip citations if confident</button></div>
+          <div class="progress"><div class="bar" id="bar" style="width: 0%;"></div></div>
+          <div class="status" id="status"></div>
+          <div class="controls">
+            <button class="ghost" id="restart">Restart</button>
+            <button class="primary" id="next" disabled="">Next</button>
+          </div>
+        </div>
+        <div id="result" class="result" style="display:none"></div>
+      </main>
+    </div>
+  </div>
+
+<script>
+/* ---------- Question Bank (10 randomized each run) ---------- */
+const ALL_QUESTIONS = [
+  // Insurance / DIPs
+  {
+    q: "In Italian motor insurance, what does R.C.A. primarily cover?",
+    options: [
+      "Damages to third parties caused by vehicle circulation",
+      "Mechanical failures of the insured vehicle",
+      "Parking fines and penalties",
+      "The driver’s own injuries regardless of fault"
+    ],
+    a: 0, explain: "R.C.A. (Responsabilità Civile Autoveicoli) is third‑party liability coverage, mandatory by law."
+  },
+  {
+    q: "Which of the following is typically an OPTIONAL guarantee across DIPs?",
+    options: ["Kasko (comprehensive/collision)", "Third‑party liability", "Green Card issuance", "Road tax payment"],
+    a: 0, explain: "Kasko is an optional direct‑damage cover; R.C.A. is mandatory."
+  },
+  {
+    q: "Which party is usually NOT considered a 'third party' for R.C.A. property damage?",
+    options: ["The cohabiting spouse of the driver", "A pedestrian hit in an accident", "Another vehicle’s owner", "A cyclist involved in the accident"],
+    a: 0, explain: "Cohabiting spouse/close relatives are excluded for property damage under standard DIPs."
+  },
+  {
+    q: "A common ground for insurer recourse is when the driver…",
+    options: ["Drives under the influence of alcohol or drugs", "Parks in a private garage", "Uses winter tires", "Pays the premium annually"],
+    a: 0, explain: "Driving under the influence triggers the company’s right of recourse in most DIPs."
+  },
+  {
+    q: "The legal minimum per‑accident limits in recent DIPs are closest to:",
+    options: ["€6.45m for injuries / €1.3m for property", "€1m for injuries / €0.2m for property", "Unlimited for both", "€10m for injuries / €5m for property mandatory"],
+    a: 0, explain: "Lawful minimums around 6.45m (persons) and 1.3m (property); higher limits are optional."
+  },
+  {
+    q: "The Green Card indicates…",
+    options: ["International motor insurance recognition in listed countries", "Vehicle’s technical inspection validity", "Paid road tax", "Driver’s medical clearance"],
+    a: 0, explain: "It proves liability coverage in non‑barred countries participating in the system."
+  },
+  {
+    q: "A PEC address is used to…",
+    options: ["Send certified email communications (e.g., complaints/claims)", "Pay premiums", "Book inspections", "Request a new license plate"],
+    a: 0, explain: "PEC is Italy’s certified email system; many DIPs list a PEC for formal notices."
+  },
+  // AI Literacy / LLM
+  {
+    q: "Which prompt technique best improves extraction accuracy across multiple contracts?",
+    options: ["Give the model a structured schema with field names", "Use only casual, short prompts", "Avoid any constraints", "Rely solely on memory"],
+    a: 0, explain: "Schema‑guided prompts reduce ambiguity and standardize outputs."
+  },
+  {
+    q: "For reproducible results across DIPs, you should…",
+    options: ["Reuse and iterate on a single tested prompt template", "Randomize instructions each time", "Never provide examples", "Only upload one document"],
+    a: 0, explain: "A consistent template plus iteration yields comparable outputs."
+  },
+  {
+    q: "A safe way to cite document evidence in your report is to…",
+    options: ["Reference the specific DIP and section/heading used", "Copy entire contracts verbatim", "Use unrelated websites", "Skip citations if confident"],
+    a: 0, explain: "Point to the source document and relevant sections for auditability."
+  },
+  // More insurance
+  {
+    q: "Claims are generally required to be reported within how many days by the policyholder?",
+    options: ["3 days", "30 days", "1 day", "No time limit"],
+    a: 0, explain: "Art. 1913 c.c. and DIPs commonly require notice within three days."
+  },
+  {
+    q: "Which is most likely an EXCLUSION across all DIPs?",
+    options: ["Participation in races/competitions", "Windshield cracks", "Towing a small trailer", "Passenger injuries"],
+    a: 0, explain: "Races/tests/competitions are standard exclusions."
+  },
+  {
+    q: "Which contact is most formal for policy complaints and legal notices in Italy?",
+    options: ["PEC email", "SMS", "WhatsApp", "Social media"],
+    a: 0, explain: "PEC is legally recognized certified email."
+  }
+];
+
+// Shuffle and pick 10
+function pickTen(arr){
+  const copy = [...arr];
+  for(let i=copy.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [copy[i],copy[j]] = [copy[j],copy[i]];
+  }
+  return copy.slice(0,10);
+}
+
+let QUESTIONS = pickTen(ALL_QUESTIONS);
+const qTotal = QUESTIONS.length;
+document.getElementById('qtotal').textContent = qTotal;
+
+let idx = 0;
+let score = 0;
+let answered = false;
+let startTime = Date.now();
+let timerEl = document.getElementById('timer');
+let tick = setInterval(()=>{
+  const s = Math.floor((Date.now() - startTime)/1000);
+  const mm = String(Math.floor(s/60)).padStart(2,'0');
+  const ss = String(s%60).padStart(2,'0');
+  timerEl.textContent = mm+":"+ss;
+}, 1000);
+
+const qEl = document.getElementById('question');
+const answersEl = document.getElementById('answers');
+const barEl = document.getElementById('bar');
+const statusEl = document.getElementById('status');
+const nextBtn = document.getElementById('next');
+const restartBtn = document.getElementById('restart');
+const scoreEl = document.getElementById('score');
+const qnumEl = document.getElementById('qnum');
+const qa = document.getElementById('qa');
+const result = document.getElementById('result');
+
+function render(){
+  answered = false;
+  nextBtn.disabled = true;
+  statusEl.textContent = "";
+  qnumEl.textContent = idx+1;
+  barEl.style.width = ((idx)/qTotal*100) + "%";
+  const {q, options} = QUESTIONS[idx];
+  qEl.textContent = q;
+  answersEl.innerHTML = "";
+  options.forEach((opt, i)=>{
+    const btn = document.createElement('button');
+    btn.className = "btn";
+    btn.textContent = opt;
+    btn.onclick = () => choose(i, btn);
+    answersEl.appendChild(btn);
+  });
+}
+
+function choose(choice, btn){
+  if(answered) return;
+  answered = true;
+  const correct = QUESTIONS[idx].a;
+  const btns = answersEl.querySelectorAll('.btn');
+  btns.forEach((b, i)=>{
+    if(i===correct) b.classList.add('correct');
+    if(i===choice && i!==correct) b.classList.add('wrong');
+    b.disabled = true;
+  });
+  if(choice===correct){
+    score++;
+    scoreEl.textContent = score;
+    statusEl.innerHTML = "✅ Correct! <span style='color:var(--muted)'>"+QUESTIONS[idx].explain+"</span>";
+  }else{
+    statusEl.innerHTML = "✖️ Not quite. <span style='color:var(--muted)'>"+QUESTIONS[idx].explain+"</span>";
+  }
+  nextBtn.disabled = false;
+}
+
+nextBtn.onclick = () => {
+  idx++;
+  if(idx<qTotal) render();
+  else finish();
+};
+
+restartBtn.onclick = () => {
+  QUESTIONS = pickTen(ALL_QUESTIONS);
+  idx=0;score=0;scoreEl.textContent=0;startTime=Date.now();
+  qa.style.display='block'; result.style.display='none';
+  render();
+};
+
+function finish(){
+  barEl.style.width = "100%";
+  qa.style.display='none';
+  clearInterval(tick);
+  const s = Math.floor((Date.now() - startTime)/1000);
+  const mm = String(Math.floor(s/60)).padStart(2,'0');
+  const ss = String(s%60).padStart(2,'0');
+  const percent = Math.round(score/qTotal*100);
+  const badge = percent>=90 ? "Expert" : percent>=70 ? "Proficient" : percent>=50 ? "Learner" : "Starter";
+  result.style.display='block';
+  result.innerHTML = `
+    <h2>Your Score: ${score}/${qTotal} – <span style="color:var(--accent)">${percent}%</span> (${badge})</h2>
+    <div class="grid-two">
+      <div class="stat"><strong>Elapsed Time</strong><br>${mm}:${ss}</div>
+      <div class="stat"><strong>Best Practices</strong><br>Use schema prompts • Reuse templates • Cite DIPs</div>
+    </div>
+    <button class="primary" onclick="downloadSummary()">Download Results</button>
+    <button class="ghost" onclick="(restartBtn.onclick)()">Play Again</button>
+  `;
+}
+
+function downloadSummary(){
+  const lines = [
+    "AI Literacy & Motor Insurance – Quiz Results",
+    `Score: ${score}/${qTotal}`,
+    `Time: ${timerEl.textContent}`,
+    "",
+    "Questions & Explanations:",
+    ...QUESTIONS.map((q,i)=>`${i+1}. ${q.q}\n   Correct: ${q.options[q.a]}\n   Note: ${q.explain}`)
+  ];
+  const blob = new Blob([lines.join("\n")], {type:"text/plain"});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = "quiz_results.txt";
+  document.body.appendChild(a); a.click(); a.remove();
+}
+
+// Kick off
+render();
+</script>
+
+
+</body></html>
