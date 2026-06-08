@@ -17,35 +17,23 @@ import {
 
 /* ------------------------------------------------------------------ *
  *  DATI DELL'ASSOCIAZIONE
- *  ⚠️  SEGNAPOSTO: sostituisci i valori contrassegnati con i dati reali.
- *  Tutto ciò che serve modificare è qui in un unico punto.
+ *  Dati ufficiali. Per modificarli basta aggiornare questo oggetto.
  * ------------------------------------------------------------------ */
 const DATI = {
   nome: 'Uguali nelle Diversità APS',
-  // Percorso del logo. Le immagini incollate in chat non sono salvabili su file:
-  // qui c'è una ricostruzione SVG fedele. Per usare il PNG ufficiale, copia il
-  // file in `public/logo.png` e cambia questa riga in '/logo.png'.
-  logo: '/logo.svg',
+  // Logo ufficiale: file public/logo.png
+  logo: '/logo.png',
 
-  // TODO: inserire il Codice Fiscale REALE (11 cifre) per il 5x1000.
-  codiceFiscale: '00000000000',
+  // Codice Fiscale dell'associazione (per il 5x1000)
+  codiceFiscale: '93119630619',
 
-  // TODO: inserire i contatti reali.
-  email: 'info@ugualinellediversita.it',
-  telefono: '+39 000 000 0000',
-  telefonoHref: '+390000000000',
+  email: 'raffaele.iavazzi@sindacatosalp.it',
+  telefono: '0823 1254702',
+  telefonoHref: '+3908231254702',
 
-  // TODO: inserire la sede legale reale.
-  sede: 'Via Esempio 1, 00000 Città (PR)',
+  sede: 'Via Nazario Sauro 22, 81100 Caserta (CE)',
 
-  // TODO (opzionale): coordinate per la donazione diretta.
-  iban: 'IT00 X000 0000 0000 0000 0000 000',
-
-  // TODO (opzionale): inserire i profili social reali.
-  social: {
-    facebook: '#',
-    instagram: '#',
-  },
+  presidente: 'Dr. Raffaele Iavazzi',
 }
 
 const NAV = [
@@ -413,11 +401,11 @@ export default function UgualiNelleDiversita() {
                   <div className="my-6 h-px bg-brand-ink/10" />
 
                   <p className="text-sm font-bold uppercase tracking-wide text-brand-inkSoft">
-                    Preferisci donare direttamente?
+                    Vuoi sostenerci in altri modi?
                   </p>
-                  <p className="mt-2 flex items-center gap-2 font-semibold text-brand-ink">
-                    <IconEuro className="h-5 w-5 text-brand-redDeep" />
-                    <span className="select-all break-all">{DATI.iban}</span>
+                  <p className="mt-2 text-sm text-brand-inkSoft">
+                    Scrivici: saremo felici di spiegarti come dare una mano,
+                    diventare volontario o sostenere i nostri progetti.
                   </p>
                   <a
                     href={`mailto:${DATI.email}?subject=Vorrei%20sostenere%20Uguali%20nelle%20Diversit%C3%A0`}
@@ -517,8 +505,8 @@ export default function UgualiNelleDiversita() {
               <span className="font-display text-lg font-bold">{DATI.nome}</span>
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-brand-cream/75">
-              Associazione di Promozione Sociale per l'integrazione delle
-              persone con disabilità.
+              Associazione di Promozione Sociale iscritta al RUNTS, per
+              l'integrazione delle persone con disabilità.
             </p>
           </div>
 
@@ -550,11 +538,17 @@ export default function UgualiNelleDiversita() {
                 {DATI.sede}
               </p>
               <p>
-                <a href={`mailto:${DATI.email}`} className="hover:text-white">
+                <a href={`tel:${DATI.telefonoHref}`} className="hover:text-white">
+                  {DATI.telefono}
+                </a>
+              </p>
+              <p>
+                <a href={`mailto:${DATI.email}`} className="break-all hover:text-white">
                   {DATI.email}
                 </a>
               </p>
               <p>C.F. {DATI.codiceFiscale}</p>
+              <p>Presidente: {DATI.presidente}</p>
             </address>
           </div>
         </div>

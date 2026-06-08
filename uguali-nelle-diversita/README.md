@@ -26,13 +26,14 @@ npm run preview  # anteprima locale della build di produzione
 
 | Elemento | Dove |
 |---|---|
-| Codice Fiscale, contatti, sede, IBAN | oggetto `DATI` in `src/UgualiNelleDiversita.jsx` |
-| Logo | `public/logo.svg` (oppure copia il PNG ufficiale in `public/logo.png` e aggiorna `DATI.logo`) |
+| Codice Fiscale, contatti, sede, presidente | oggetto `DATI` in `src/UgualiNelleDiversita.jsx` |
+| Logo | file ufficiale `public/logo.png` (referenziato da `DATI.logo`) |
 | Foto | cartella `public/foto/` + array `FOTO` in `src/UgualiNelleDiversita.jsx` |
-| Numeri di impatto | array `IMPATTO` |
+| Numeri di impatto | array `IMPATTO` (attualmente valori indicativi) |
 
-> ⚠️ I valori contrassegnati con `TODO` (Codice Fiscale, telefono, email, sede,
-> IBAN) sono **segnaposto**: vanno sostituiti con i dati reali prima di pubblicare.
+> ℹ️ I dati ufficiali dell'associazione (C.F., contatti, sede, presidente) sono
+> già inseriti. L'**IBAN** è volutamente assente: aggiungilo in `DATI` solo se
+> serve. Ricorda di aggiungere il file **`public/logo.png`** e le foto reali.
 
 ---
 
