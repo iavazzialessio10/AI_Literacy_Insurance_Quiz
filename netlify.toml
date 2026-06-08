@@ -1,0 +1,9 @@
+# Configurazione Netlify per il sito "Uguali nelle Diversità APS".
+# Il progetto Vite vive nella sottocartella `uguali-nelle-diversita/`.
+[build]
+  base = "uguali-nelle-diversita"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"

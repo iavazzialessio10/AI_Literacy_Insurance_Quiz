@@ -1,0 +1,4 @@
+
+# Python cache (skill scripts)
+__pycache__/
+*.pyc

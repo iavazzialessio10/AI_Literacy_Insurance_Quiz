@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Logo Uguali nelle Diversità: quattro mani di colori diversi unite a formare un cuore">
+  <title>Uguali nelle Diversità</title>
+  <!--
+    Ricostruzione vettoriale del logo (segnaposto fedele).
+    Quattro "petali/mani" di colori diversi (i toni della pelle) uniti al
+    centro, con il contorno rosso del marchio. Sostituibile con il PNG ufficiale.
+  -->
+  <g fill="none" stroke="#E03127" stroke-width="14" stroke-linejoin="round">
+    <!-- Mano in alto (tono chiaro) -->
+    <g>
+      <path d="M200,200 C124,165 120,55 200,55 C280,55 276,165 200,200 Z" fill="#F3D2B3"/>
+      <g stroke="#7A4A24" stroke-opacity="0.35" stroke-width="7" stroke-linecap="round">
+        <line x1="182" y1="86" x2="182" y2="126"/>
+        <line x1="200" y1="80" x2="200" y2="124"/>
+        <line x1="218" y1="86" x2="218" y2="126"/>
+      </g>
+    </g>
+    <!-- Mano a destra (tono dorato) -->
+    <g transform="rotate(90 200 200)">
+      <path d="M200,200 C124,165 120,55 200,55 C280,55 276,165 200,200 Z" fill="#E9B44C"/>
+      <g stroke="#7A4A24" stroke-opacity="0.4" stroke-width="7" stroke-linecap="round">
+        <line x1="182" y1="86" x2="182" y2="126"/>
+        <line x1="200" y1="80" x2="200" y2="124"/>
+        <line x1="218" y1="86" x2="218" y2="126"/>
+      </g>
+    </g>
+    <!-- Mano in basso (tono marrone) -->
+    <g transform="rotate(180 200 200)">
+      <path d="M200,200 C124,165 120,55 200,55 C280,55 276,165 200,200 Z" fill="#7A4A24"/>
+      <g stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="7" stroke-linecap="round">
+        <line x1="182" y1="86" x2="182" y2="126"/>
+        <line x1="200" y1="80" x2="200" y2="124"/>
+        <line x1="218" y1="86" x2="218" y2="126"/>
+      </g>
+    </g>
+    <!-- Mano a sinistra (tono scuro) -->
+    <g transform="rotate(270 200 200)">
+      <path d="M200,200 C124,165 120,55 200,55 C280,55 276,165 200,200 Z" fill="#1C1C1C"/>
+      <g stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="7" stroke-linecap="round">
+        <line x1="182" y1="86" x2="182" y2="126"/>
+        <line x1="200" y1="80" x2="200" y2="124"/>
+        <line x1="218" y1="86" x2="218" y2="126"/>
+      </g>
+    </g>
+  </g>
+</svg>
