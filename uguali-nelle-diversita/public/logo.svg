@@ -1,46 +1,43 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Logo Uguali nelle Diversità: quattro mani di colori diversi unite a formare un cuore">
   <title>Uguali nelle Diversità</title>
   <!--
-    Ricostruzione vettoriale del logo (segnaposto fedele).
-    Quattro "petali/mani" di colori diversi (i toni della pelle) uniti al
-    centro, con il contorno rosso del marchio. Sostituibile con il PNG ufficiale.
+    Ricostruzione vettoriale fedele del logo (segnaposto).
+    Quattro cuori con contorno rosso disposti a girandola; dentro ciascuno una
+    mano di un diverso tono della pelle. Per il marchio ufficiale, sostituire
+    con il PNG: salvare il file in public/logo.png e impostare DATI.logo = '/logo.png'.
   -->
-  <g fill="none" stroke="#E03127" stroke-width="14" stroke-linejoin="round">
-    <!-- Mano in alto (tono chiaro) -->
-    <g>
-      <path d="M200,200 C124,165 120,55 200,55 C280,55 276,165 200,200 Z" fill="#F3D2B3"/>
-      <g stroke="#7A4A24" stroke-opacity="0.35" stroke-width="7" stroke-linecap="round">
-        <line x1="182" y1="86" x2="182" y2="126"/>
-        <line x1="200" y1="80" x2="200" y2="124"/>
-        <line x1="218" y1="86" x2="218" y2="126"/>
-      </g>
+  <defs>
+    <!-- Cuore con punta al centro (200,200) e lobi verso l'alto -->
+    <path id="uds-heart" d="M200,200 C168,150 128,142 128,102 C128,72 164,64 184,86 C191,94 196,102 200,110 C204,102 209,94 216,86 C236,64 272,72 272,102 C272,142 232,150 200,200 Z"/>
+    <!-- Mano stilizzata (palmo + 4 dita + pollice) rivolta verso l'alto -->
+    <g id="uds-hand">
+      <rect x="167" y="118" width="66" height="54" rx="20"/>
+      <rect x="171" y="84"  width="14" height="52" rx="7"/>
+      <rect x="188" y="76"  width="14" height="60" rx="7"/>
+      <rect x="205" y="82"  width="14" height="54" rx="7"/>
+      <rect x="221" y="94"  width="13" height="44" rx="6.5"/>
+      <rect x="149" y="134" width="13" height="42" rx="6.5" transform="rotate(40 155 155)"/>
     </g>
-    <!-- Mano a destra (tono dorato) -->
-    <g transform="rotate(90 200 200)">
-      <path d="M200,200 C124,165 120,55 200,55 C280,55 276,165 200,200 Z" fill="#E9B44C"/>
-      <g stroke="#7A4A24" stroke-opacity="0.4" stroke-width="7" stroke-linecap="round">
-        <line x1="182" y1="86" x2="182" y2="126"/>
-        <line x1="200" y1="80" x2="200" y2="124"/>
-        <line x1="218" y1="86" x2="218" y2="126"/>
-      </g>
-    </g>
-    <!-- Mano in basso (tono marrone) -->
-    <g transform="rotate(180 200 200)">
-      <path d="M200,200 C124,165 120,55 200,55 C280,55 276,165 200,200 Z" fill="#7A4A24"/>
-      <g stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="7" stroke-linecap="round">
-        <line x1="182" y1="86" x2="182" y2="126"/>
-        <line x1="200" y1="80" x2="200" y2="124"/>
-        <line x1="218" y1="86" x2="218" y2="126"/>
-      </g>
-    </g>
-    <!-- Mano a sinistra (tono scuro) -->
-    <g transform="rotate(270 200 200)">
-      <path d="M200,200 C124,165 120,55 200,55 C280,55 276,165 200,200 Z" fill="#1C1C1C"/>
-      <g stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="7" stroke-linecap="round">
-        <line x1="182" y1="86" x2="182" y2="126"/>
-        <line x1="200" y1="80" x2="200" y2="124"/>
-        <line x1="218" y1="86" x2="218" y2="126"/>
-      </g>
-    </g>
+  </defs>
+
+  <!-- Mano in alto: marrone -->
+  <g transform="rotate(0 200 200)">
+    <use href="#uds-heart" fill="#ffffff" stroke="#E8392B" stroke-width="11" stroke-linejoin="round"/>
+    <use href="#uds-hand" fill="#7A4A24"/>
+  </g>
+  <!-- Mano a destra: scura -->
+  <g transform="rotate(90 200 200)">
+    <use href="#uds-heart" fill="#ffffff" stroke="#E8392B" stroke-width="11" stroke-linejoin="round"/>
+    <use href="#uds-hand" fill="#1C1C1C"/>
+  </g>
+  <!-- Mano in basso: dorata -->
+  <g transform="rotate(180 200 200)">
+    <use href="#uds-heart" fill="#ffffff" stroke="#E8392B" stroke-width="11" stroke-linejoin="round"/>
+    <use href="#uds-hand" fill="#F4B43C"/>
+  </g>
+  <!-- Mano a sinistra: chiara -->
+  <g transform="rotate(270 200 200)">
+    <use href="#uds-heart" fill="#ffffff" stroke="#E8392B" stroke-width="11" stroke-linejoin="round"/>
+    <use href="#uds-hand" fill="#F6DCC4"/>
   </g>
 </svg>
